@@ -75,7 +75,9 @@ const useLogin = ({
         }
 
         if (redirect) {
-          window.open(redirect);
+          console.log('got some redirect');
+          const tab = window.open();
+          tab.location.href = redirect;
         }
       },
     },

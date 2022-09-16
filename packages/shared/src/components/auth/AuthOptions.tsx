@@ -27,6 +27,8 @@ import { SocialRegistrationForm } from './SocialRegistrationForm';
 import useProfileForm from '../../hooks/useProfileForm';
 import { CloseAuthModalFunc } from '../../hooks/useAuthForms';
 import { logout } from '../../lib/user';
+import usePersistentState from '../../hooks/usePersistentState';
+import usePersistentContext from '../../hooks/usePersistentContext';
 
 export enum Display {
   Default = 'default',
@@ -62,6 +64,7 @@ function AuthOptions({
   const { authVersion } = useContext(FeaturesContext);
   const isV2 = authVersion === AuthVersion.V2;
   const [email, setEmail] = useState('');
+  const [authFlow] = usePersistentContext('auth-flow', null);
   const [activeDisplay, setActiveDisplay] = useState(() =>
     storage.getItem(SIGNIN_METHOD_KEY) ? Display.SignBack : defaultDisplay,
   );
@@ -74,6 +77,8 @@ function AuthOptions({
     isLoading: isProfileUpdateLoading,
   } = useProfileForm();
 
+  console.log(authFlow);
+
   const { registration, validateRegistration, onSocialRegistration } =
     useRegistration({
       key: 'registration_form',
@@ -82,13 +87,21 @@ function AuthOptions({
         setActiveDisplay(Display.EmailSent);
       },
       onInvalidRegistration: setRegistrationHints,
-      onRedirect: (redirect) => window.open(redirect),
+      onRedirect: (redirect) => {
+        // set cookie = tabId
+        window.open(redirect);
+      },
     });
 
   const onProviderClick = (provider: string) => {
     setChosenProvider(provider);
     onSocialRegistration(provider);
   };
+
+  window.addEventListener('message', (e) => {
+    console.log('got some kind of message');
+    console.log(e);
+  });
 
   useWindowEvents<SocialRegistrationFlow>(
     'message',
