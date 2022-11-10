@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@daildotdev/extension": [
+        "../extension/src"
+      ],
+      "@daildotdev/extension/*": [
+        "../extension/src/*"
+      ],
+      "@daildotdev/webapp": [
+        "../webapp"
+      ]
+    }
+  }
+}

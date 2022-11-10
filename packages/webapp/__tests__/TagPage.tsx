@@ -16,6 +16,7 @@ import {
 import { getFeedSettingsQueryKey } from '@dailydotdev/shared/src/hooks/useFeedSettings';
 import SettingsContext, {
   SettingsContextData,
+  ThemeMode,
 } from '@dailydotdev/shared/src/contexts/SettingsContext';
 import ad from '@dailydotdev/shared/__tests__/fixture/ad';
 import defaultUser from '@dailydotdev/shared/__tests__/fixture/loggedUser';
@@ -95,7 +96,7 @@ const renderComponent = (
     showOnlyUnreadPosts: false,
     openNewTab: true,
     setTheme: jest.fn(),
-    themeMode: 'dark',
+    themeMode: ThemeMode.Dark,
     setSpaciness: jest.fn(),
     toggleOpenNewTab: jest.fn(),
     toggleShowOnlyUnreadPosts: jest.fn(),

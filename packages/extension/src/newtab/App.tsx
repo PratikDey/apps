@@ -20,7 +20,6 @@ import { RouterContext } from 'next/dist/shared/lib/router-context';
 import useTrackPageView from '@dailydotdev/shared/src/hooks/analytics/useTrackPageView';
 import useDeviceId from '@dailydotdev/shared/src/hooks/analytics/useDeviceId';
 import { useToastNotification } from '@dailydotdev/shared/src/hooks/useToastNotification';
-import CustomRouter from '../lib/CustomRouter';
 import { version } from '../../package.json';
 import MainFeedPage from './MainFeedPage';
 import { DndContextProvider } from './DndContext';
@@ -29,6 +28,7 @@ import {
   getContentScriptPermissionAndRegister,
   useExtensionPermission,
 } from '../companion/useExtensionPermission';
+import CustomRouter from '../lib/CustomRouter';
 
 const AnalyticsConsentModal = dynamic(() => import('./AnalyticsConsentModal'));
 
